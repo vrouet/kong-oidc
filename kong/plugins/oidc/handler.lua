@@ -31,7 +31,7 @@ function handle(oidcConfig)
     response = introspect(oidcConfig)
     if response then
       if oidcConfig.roles then
-        authorize(oidcConfig.roles, response.roles, response.username)
+        authorize(oidcConfig.roles, response.realm_access.roles, response.username)
       end
       utils.injectUser(response, oidcConfig.userinfo_header_name)
       utils.injectGroups(response, oidcConfig.groups_claim)
