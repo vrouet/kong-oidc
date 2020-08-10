@@ -1,3 +1,5 @@
+**Note about this fork:** This fork is based on Revomatico's fork (https://github.com/revomatico/kong-oidc) in order to keep up with lua-resty-openidc, and abenitovsc's fork (https://github.com/abenitovsc/kong-oidc), to add role-based permissions.
+
 # What is Kong OIDC plugin
 
 [![Join the chat at https://gitter.im/nokia/kong-oidc](https://badges.gitter.im/nokia/kong-oidc.svg)](https://gitter.im/nokia/kong-oidc?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -97,6 +99,8 @@ If you're using `luarocks` execute the following:
 | `config.disable_id_token_header`            | no                                         | false    | Disable passing the ID Token to the upstream server                                                                                                                                     |
 | `config.disable_access_token_header`        | no                                         | false    | Disable passing the Access Token to the upstream server                                                                                                                                 |
 | `config.groups_claim`                       | groups                                     | false    | Name of the claim in the token to get groups from                                                                                                                                       |
+
+| `config.roles`                              | no                                         | false    | List of 1-N roles separated by comma. All of these roles will be compared with the user roles provided in the introspection service response                                                                                                                                   |
 
 ### Enabling kong-oidc
 

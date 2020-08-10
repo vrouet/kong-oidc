@@ -70,7 +70,8 @@ function M.get_options(config, ngx)
     disable_userinfo_header = config.disable_userinfo_header == "yes",
     disable_id_token_header = config.disable_id_token_header == "yes",
     disable_access_token_header = config.disable_access_token_header == "yes",
-    groups_claim = config.groups_claim == "groups"
+    groups_claim = config.groups_claim == "groups",
+    roles = config.roles
   }
 end
 
@@ -120,6 +121,27 @@ function M.has_bearer_access_token()
     end
   end
   return false
+end
+
+function M.hasRequiredRoles(roles, userRoles)
+  if(userRoles == nil) then
+    return false
+  end
+  local rolesArray = split(roles,",")
+  for k,v in pairs(rolesArray) do
+    for x,i in pairs(userRoles) do
+      if v == i then return true end
+      end
+  end
+  return false
+end
+
+function split(s, delimiter)
+  local result = {};
+  for match in (s..delimiter):gmatch("(.-)"..delimiter) do
+    table.insert(result, match);
+  end
+  return result;
 end
 
 return M
